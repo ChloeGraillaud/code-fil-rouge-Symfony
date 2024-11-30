@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Galerie - Kahn Photography{% endblock %}
+
+{% block body %}
+<div>
+    <h2>Portraits</h2>
+    <div class="galeriecontainer">
+        <div class="galerie1">
+            {% for photo in photos %}
+                {% if photo.categorie.id == 1 %}
+                    <img src="{{ asset(photo.url) }}" class="imghover galerieimg1 imgborder" alt="{{ photo.altText }}" width="274" height="410">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<div>
+    <h2>Paysages</h2>
+    <div class="galeriecontainer">
+        <div class="galerie2">
+            {% for photo in photos %}
+                {% if photo.categorie.id == 2 %}
+                    <img src="{{ asset(photo.url) }}" class="imghover galerieimg2 imgborder" alt="{{ photo.altText }}" width="432" height="262">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

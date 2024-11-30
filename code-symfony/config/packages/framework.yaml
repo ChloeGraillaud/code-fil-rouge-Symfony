@@ -1,0 +1,19 @@
+# see https://symfony.com/doc/current/reference/configuration/framework.html
+framework:
+    secret: '%env(APP_SECRET)%'
+    #csrf_protection: true
+
+    # Configuration de la session pour une durée de vie prolongée
+    session:
+        handler_id: null            # Utilise le gestionnaire de session par défaut
+        cookie_lifetime: 604800     # Durée de vie du cookie de session en secondes (7 jours)
+        gc_maxlifetime: 604800      # Durée de vie de la session côté serveur (7 jours)
+
+    #esi: true
+    #fragments: true
+
+when@test:
+    framework:
+        test: true
+        session:
+            storage_factory_id: session.storage.factory.mock_file

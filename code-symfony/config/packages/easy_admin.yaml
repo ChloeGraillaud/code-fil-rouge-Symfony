@@ -1,0 +1,11 @@
+easy_admin:
+  dashboard:
+    title: 'Mon tableau de bord'
+  entities:
+    - App\Entity\Admin
+    - App\Entity\Service
+    - App\Entity\Commentaire:
+        controller: App\Controller\Admin\CommentaireCrudController
+    - App\Entity\Photo
+    - App\Entity\Verification
+

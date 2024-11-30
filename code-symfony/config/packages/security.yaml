@@ -1,0 +1,36 @@
+security:
+    password_hashers:
+        App\Entity\Admin:
+            algorithm: auto
+
+    providers:
+        admin_user_provider:
+            entity:
+                class: App\Entity\Admin
+                property: email
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            lazy: true
+            provider: admin_user_provider
+            custom_authenticator: App\Security\AppAuthenticator
+            pattern: ^/(admin|login|logout)
+            form_login:
+                login_path: app_login
+                check_path: app_login
+                default_target_path: admin
+                enable_csrf: true
+            entry_point: form_login  # Définir le point d'entrée pour l'authentification
+            logout:
+                path: /logout
+                target: /home
+
+            remember_me:
+                secret: '%env(APP_SECRET)%'
+                lifetime: 604800        # Durée de vie du cookie "se souvenir de moi" en secondes (7 jours)
+                path: / 
+                always_remember_me: true 

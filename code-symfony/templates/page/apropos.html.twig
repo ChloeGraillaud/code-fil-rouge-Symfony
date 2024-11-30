@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}À propos - Kahn Photography{% endblock %}
+
+{% block body %}
+    <div class="aproposcontainer">
+      <img 
+        src="{{ asset('images/matheus-ferrero-pg_WCHWSdT8-unsplash.jpg') }}" 
+        class="imghover imgborder" 
+        alt="Photo portrait en couleur de l'artiste Leonora Kahn, face à la caméra portant un chapeau, sur un fond de feuille naturelles" 
+        width="287" 
+        height="431"
+      >
+      <div class="apropostext">
+        <p>
+          Passionnée par la nature, je capture la beauté du monde avec un regard attentif et poétique. 
+          Amoureuse des grands espaces et des petits détails, je m'engage fermement pour des valeurs 
+          de qualité et de respect de l'environnement. Mes clichés, empreints d'authenticité et de délicatesse, 
+          reflètent mon profond respect pour la planète et mon désir de préserver sa beauté pour les générations futures.
+        </p>
+        <p>
+          Je vous attends dans mon atelier situé à Paris, 
+          niché au coeur du 6ème arrondissement pour discuter
+          de votre projet dans un cadre inspirant et authentique
+          afin de capturer l'essence même de ce qui vous passionne 
+          et vous fait vibrer.
+        </p>
+      </div>
+      <img 
+        src="{{ asset('images/harry-cunningham-UWblg2i6Blw-unsplash.jpg') }}"
+        class="imghover imgborder" 
+        alt="Photo de l'atelier de la photographe, montrant la lightroom et bureau de travail" 
+        width="331" 
+        height="496"
+      >
+    </div>
+ <div>
+      <h2 class="devise">
+        Mes œuvres sont bien plus que de simples images : elles sont des fenêtres ouvertes <br> 
+        sur des mondes de beauté, d'émotion et d'inspiration.
+      </h2>
+      <div class="mapcontainer">
+        <h2>Retrouvez-moi au 4 Rue Pierre Sarrazin à Paris 6ème</h2>
+        <div class="google-map">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d163.872895016659!2d2.3422192058228846!3d48.85087244672941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sen!2sfr!4v1718793129708!5m2!1sen!2sfr" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+
+{% endblock %}

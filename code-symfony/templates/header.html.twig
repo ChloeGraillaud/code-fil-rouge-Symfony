@@ -1,0 +1,79 @@
+<header>
+    <div class="cameralogo">
+        <img src="{{ asset('images/camera logo.svg') }}" alt="Camera Logo" width="85" height="85">
+    </div>
+
+    <div class="dropdown">
+        <button class="dropmenuimg" onclick="toggleDropdown()">
+            <img src="images/hamburger menu.png" alt="Menu" width="75" height="75">
+        </button>
+        <div id="mydropdown" class="dropdownmenu" style="display: none;">
+             <nav class="mobile-nav">
+                <a href="/" class="nav-link">
+                    <h2 class="nav-link-text">Accueil</h2>
+                </a>
+                <a href="/tarifs" class="nav-link">
+                    <h2 class="nav-link-text">Tarifs</h2>
+                </a>
+                <a href="/apropos" class="nav-link">
+                    <h2 class="nav-link-text">À propos</h2>
+                </a>
+                <a href="/galerie" class="nav-link">
+                    <h2 class="nav-link-text">Galerie</h2>
+                </a>
+                <a href="/contact" class="nav-link">
+                    <h2 class="nav-link-text">Contact</h2>
+                </a>
+                {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+            <a href="{{ path('admin') }}">
+                <h2 class="nav-link-text">Dashboard</h2>
+            </a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+
+    <a href="{{ path('home') }}">
+    <img src="{{ asset('images/Logo artiste.svg') }}" alt="Artiste Logo" width="250" height="auto">
+</a>
+
+    <nav class="desktop-nav">
+        <a href="/" class="nav-link">
+            <h2 class="nav-link-text">Accueil</h2>
+        </a>
+        <a href="/tarifs" class="nav-link">
+            <h2 class="nav-link-text">Tarifs</h2>
+        </a>
+        <a href="/apropos" class="nav-link">
+            <h2 class="nav-link-text">À propos</h2>
+        </a>
+        <a href="/galerie" class="nav-link">
+            <h2 class="nav-link-text">Galerie</h2>
+        </a>
+        <a href="/contact" class="nav-link">
+            <h2 class="nav-link-text">Contact</h2>
+        </a>
+        {% if app.user and 'ROLE_ADMIN' in app.user.roles %}
+        <a href="{{ path('admin') }}">
+            <h2 class="nav-link-text">Dashboard</h2>
+        </a>
+    {% endif %}
+    </nav>
+</header>
+
+<script>
+    function toggleDropdown() {
+        const dropdownMenu = document.getElementById('mydropdown');
+        const isVisible = dropdownMenu.style.display === 'flex';
+        dropdownMenu.style.display = isVisible ? 'none' : 'flex';
+    }
+
+    
+    document.addEventListener('click', function(event) {
+        const dropdown = document.querySelector('.dropdown');
+        const dropdownMenu = document.getElementById('mydropdown');
+        if (!dropdown.contains(event.target)) {
+            dropdownMenu.style.display = 'none';
+        }
+    });
+</script>

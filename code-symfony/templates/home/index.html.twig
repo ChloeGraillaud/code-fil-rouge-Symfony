@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Kahn Photography{% endblock %}
+
+{% block body %}
+
+<section class="hometext">
+    <h1 class="hometitre">Leonora Kahn<br>Photographie</h1>
+    <p>
+        Photographe passionnée par la nature et l'écologie, je capture la beauté authentique des humains et des animaux. Mon travail reflète la connexion profonde entre l'homme et la nature. Chaque portrait est une histoire unique et émouvante, qu'il soit individuel, familial ou animalier.
+        <br><br>
+        Découvrez mon univers photographique et laissez-vous séduire par des images empreintes de sincérité et de respect.
+    </p>
+    <a href="{{ path('contact') }}" class="bouton">Un projet ? Écrivez-moi</a>
+</section>
+
+<section class="homephotos">
+    <img src="{{ asset('images/david-clode-I_eOutw1MTg-unsplash.jpg') }}" class="imghover imgborder" alt="Gros plan d'un boa constrictor brun et noir" width="235" height="351">
+    <img src="{{ asset('images/filipp-romanovski-CGKYNN3uuVo-unsplash.jpg') }}" class="imghover imgborder" alt="Portrait d'une femme aux cheveux bruns courts sur fond jaune ocre" width="235" height="351">
+    <br>
+    <img src="{{ asset('images/sean-oulashin-KMn4VEeEPR8-unsplash.jpg') }}" class="imghover imgborder" alt="Photo d'une plage au coucher de soleil, avec une eau turquoise" width="357" height="238">
+    <img src="{{ asset('images/dawid-zawila--G3rw6Y02D0-unsplash.jpg') }}" class="imghover imgborder" alt="Photo de plaines d'herbe verte, prise à l'heure d'or avec de la brume en arrière-plan" width="357" height="238">
+</section>
+
+<!-- Section Carousel des témoignages -->
+<section class="testimonials">
+  <div class="container text-center">
+    <div id="testimonialCarousel" class="carousel slide testimonial-carousel mx-auto" data-bs-ride="carousel" data-bs-interval="3000">
+        <h2>Quelques témoignages</h2>
+        <div class="carousel-inner-home">
+            {% for comment in comments|batch(3) %}
+                <div class="carousel-item {% if loop.first %}active{% endif %}">
+                    <div class="d-flex justify-content-center align-items-stretch">
+                        {% for item in comment %}
+                            <div class="testimonial-item mx-2">
+                                <p>{{ item.texte }}</p>
+                                <h4>{{ item.nomExpediteur }}</h4>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+  </div>
+</section>
+
+<!-- Section Commentaire -->
+<section id="comment-section" class="contact-form">
+    <div class="testimonial-title">
+        <h2>Laisser un commentaire</h2>
+    </div>
+
+    {% if comment_submitted %}
+        <div id="confirmation-message" class="message-confirmation d-flex align-items-center justify-content-center" style="min-height: 200px;">
+            <p class="text-center">Merci de votre commentaire ! Il sera affiché après validation.</p>
+        </div>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                const commentSection = document.getElementById('comment-section');
+                if (commentSection) {
+                    commentSection.scrollIntoView({ behavior: 'smooth' });
+                }
+
+                const confirmationMessage = document.getElementById('confirmation-message');
+                if (confirmationMessage) {
+                    setTimeout(function() {
+                        confirmationMessage.style.display = 'none';
+                    }, 5000); 
+                }
+            });
+        </script>
+    {% else %}
+        <div class="contactform">
+            <form method="post" action="{{ path('add_comment') }}">
+                <div class="formgrouprow">
+                    <div class="formgroup">
+                        <label for="nom">Nom</label>
+                        <br>
+                        <input type="text" id="nom" name="nom" required>
+                    </div>
+                </div>
+                <div class="formgroup">
+                    <label for="message">Commentaire</label>
+                    <br>
+                    <textarea name="message" id="message" rows="5" required></textarea>
+                </div>
+                <center>
+                    <input type="submit" class="buttonform bouton" value="Envoyer">
+                </center>
+            </form>
+        </div>
+    {% endif %}
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var carouselItems = document.querySelectorAll('.carousel-item');
+        
+        
+        function adjustCarouselItems() {
+            var width = window.innerWidth;
+
+            
+            if (width < 932) {
+                carouselItems.forEach(function(item) {
+                    item.style.flex = '1 1 100%';
+                });
+            } else {
+                carouselItems.forEach(function(item) {
+                    item.style.flex = '1 1 33.33%';
+                });
+            }
+        }
+
+        
+        adjustCarouselItems();
+        window.addEventListener('resize', adjustCarouselItems);
+    });
+</script>
+
+{% endblock %}
+

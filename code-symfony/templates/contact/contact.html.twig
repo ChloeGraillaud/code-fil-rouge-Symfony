@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact - Kahn Photography{% endblock %}
+
+{% block body %}
+
+<div class="contactform">
+    <form id="contact-form">
+        <div class="formgrouprow">
+            <div class="formgroup">
+                <label for="nom">Nom</label>
+                <input type="text" id="nom" name="name" required />
+            </div>
+            <div class="formgroup">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required />
+            </div>
+        </div>
+        <div class="formgroup">
+            <label for="message">Message</label>
+            <textarea name="message" id="message" rows="5" required></textarea>
+        </div>
+        <center>
+            <input type="submit" class="buttonform bouton" value="Envoyer" />
+        </center>
+    </form>
+
+    <div id="sending-message" style="display:none;"><h2>Envoi de votre message...</h2></div>
+    <div id="confirmation-message" style="display:none;"><h2>Merci pour votre message ! Je prendrai contact avec vous sous peu.</h2></div>
+    <div id="error-message" style="display:none;">Une erreur s'est produite lors de l'envoi de l'email. Veuillez réessayer.</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@2.6.4/dist/email.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('contact-form');
+        const confirmationMessage = document.getElementById('confirmation-message');
+        const sendingMessage = document.getElementById('sending-message');
+        
+        
+        emailjs.init("Xr1CR-irF8-QLAcTO");
+        
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            console.log('Form submitted');
+            
+            form.style.display = 'none';
+            sendingMessage.style.display = 'block';
+            
+            emailjs.sendForm('service_a9jm7uh', 'template_ru317cl', this)
+                .then(function() {
+                    console.log('Email sent successfully');
+                    
+                    sendingMessage.style.display = 'none';
+                    confirmationMessage.style.display = 'block';
+                }, function(error) {
+                    console.log('Error sending email', error);
+                    
+                    sendingMessage.style.display = 'none';
+                    form.style.display = 'block';
+                    alert('Erreur lors de l\'envoi du message : ' + JSON.stringify(error));
+                });
+        });
+    });
+</script>
+
+{% endblock %}

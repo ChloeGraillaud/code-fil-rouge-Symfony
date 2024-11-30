@@ -1,0 +1,14 @@
+{# templates/admin/header.html.twig #}
+{% extends '@EasyAdmin/page/header.html.twig' %}
+
+{% block header_content %}
+    <div class="d-flex align-items-center justify-content-between">
+        {# Bouton de retour à l'accueil #}
+        <a href="{{ path('home') }}" class="btn btn-primary me-2">
+            Retour à l'accueil
+        </a>
+
+        {# Contenu de profil utilisateur existant #}
+        {{ parent() }}
+    </div>
+{% endblock %}
